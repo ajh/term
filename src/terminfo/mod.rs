@@ -251,7 +251,8 @@ impl<T: Write+Send> TerminfoTerminal<T> {
         } else { color }
     }
 
-    fn apply_cap(&mut self, cmd: &str, params: &[Param]) -> io::Result<bool> {
+    #[allow(missing_docs)]
+    pub fn apply_cap(&mut self, cmd: &str, params: &[Param]) -> io::Result<bool> {
         if let Some(cmd) = self.ti.strings.get(cmd) {
             if let Ok(s) = expand(&cmd, params, &mut Variables::new()) {
                 try!(self.out.write_all(&s));
